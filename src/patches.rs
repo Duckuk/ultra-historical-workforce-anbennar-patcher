@@ -66,7 +66,7 @@ fn has_employment_effect(node: &ParadoxNode) -> bool {
             value: ParadoxValue::Container(v),
             ..
         }) => v.iter().any(|n| n.name().contains("building_employment")),
-        _ => return false,
+        _ => false,
     }
 }
 
