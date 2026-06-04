@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "Debug executable 'ultra-historical-workforce-anbennar-patcher'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=ultra-historical-workforce-anbennar-patcher",
+                    "--",
+                    "path_to_anbennar",
+                    "path_to_uhw"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in executable 'ultra-historical-workforce-anbennar-patcher'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--bin=ultra-historical-workforce-anbennar-patcher"
+                ]
+            }
+        }
+    ]
+}
