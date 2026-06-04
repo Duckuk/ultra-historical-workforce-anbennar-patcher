@@ -262,6 +262,9 @@ pub struct Employment {
     pub shopkeepers: i64,
     pub farmers: i64,
     pub mages: i64,
+    pub bureaucrats: i64,
+    pub aristocrats: i64,
+    pub capitalists: i64,
 }
 
 impl Employment {
@@ -326,6 +329,36 @@ impl Employment {
             0
         };
 
+        let bureaucrats = if let Some(ParadoxValue::Integer(i)) = pm_node.get_value(&[
+            "building_modifiers",
+            "level_scaled",
+            "building_employment_bureaucrats_add",
+        ]) {
+            *i
+        } else {
+            0
+        };
+
+        let aristocrats = if let Some(ParadoxValue::Integer(i)) = pm_node.get_value(&[
+            "building_modifiers",
+            "level_scaled",
+            "building_employment_aristocrats_add",
+        ]) {
+            *i
+        } else {
+            0
+        };
+
+        let capitalists = if let Some(ParadoxValue::Integer(i)) = pm_node.get_value(&[
+            "building_modifiers",
+            "level_scaled",
+            "building_employment_capitalists_add",
+        ]) {
+            *i
+        } else {
+            0
+        };
+
         Self {
             engineers,
             labourers,
@@ -333,6 +366,9 @@ impl Employment {
             shopkeepers,
             farmers,
             mages,
+            bureaucrats,
+            aristocrats,
+            capitalists,
         }
     }
 }
@@ -348,6 +384,9 @@ impl std::ops::Add for Employment {
             shopkeepers: self.shopkeepers + rhs.shopkeepers,
             farmers: self.farmers + rhs.farmers,
             mages: self.mages + rhs.mages,
+            bureaucrats: self.bureaucrats + rhs.bureaucrats,
+            aristocrats: self.aristocrats + rhs.aristocrats,
+            capitalists: self.capitalists + rhs.capitalists,
         }
     }
 }
@@ -363,6 +402,27 @@ impl std::ops::Sub for Employment {
             shopkeepers: self.shopkeepers - rhs.shopkeepers,
             farmers: self.farmers - rhs.farmers,
             mages: self.mages - rhs.mages,
+            bureaucrats: self.bureaucrats - rhs.bureaucrats,
+            aristocrats: self.aristocrats - rhs.aristocrats,
+            capitalists: self.capitalists - rhs.capitalists,
+        }
+    }
+}
+
+impl std::ops::Mul<f64> for Employment {
+    type Output = Self;
+
+    fn mul(self, rhs: f64) -> Self::Output {
+        Self {
+            engineers: f64::round(self.engineers as f64 * rhs) as i64,
+            labourers: f64::round(self.labourers as f64 * rhs) as i64,
+            machinists: f64::round(self.machinists as f64 * rhs) as i64,
+            shopkeepers: f64::round(self.shopkeepers as f64 * rhs) as i64,
+            farmers: f64::round(self.farmers as f64 * rhs) as i64,
+            mages: f64::round(self.mages as f64 * rhs) as i64,
+            bureaucrats: f64::round(self.bureaucrats as f64 * rhs) as i64,
+            aristocrats: f64::round(self.aristocrats as f64 * rhs) as i64,
+            capitalists: f64::round(self.capitalists as f64 * rhs) as i64,
         }
     }
 }

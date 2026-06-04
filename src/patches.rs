@@ -34,6 +34,9 @@ const AUTOMATA_DEFAULT_TARGET: Employment = Employment {
     shopkeepers: 0,
     farmers: 0,
     mages: 0,
+    bureaucrats: 0,
+    aristocrats: 0,
+    capitalists: 0,
 };
 const AUTOMATA_ADVANCED_DEFAULT_TARGET: Employment = Employment {
     engineers: 0,
@@ -42,6 +45,9 @@ const AUTOMATA_ADVANCED_DEFAULT_TARGET: Employment = Employment {
     shopkeepers: 0,
     farmers: 0,
     mages: 0,
+    bureaucrats: 0,
+    aristocrats: 0,
+    capitalists: 0,
 };
 
 /// Searches top-level list of nodes for a name that matches
