@@ -341,17 +341,17 @@ pub fn patch_industry<P1: AsRef<Path>, P2: AsRef<Path>>(
                 let original_employment = Employment::from_pm(pm_node);
                 let target_employment = Employment::from_pm(vanilla_electric_sewing_machines_node) + Employment::from_pm(uhw_electric_sewing_machines_node);
                 let employment_mod = target_employment - original_employment;
-                final_patch.push(create_employment_override("INJECT:pm_chronomantic_food_preservatives", employment_mod.into()));
+                final_patch.push(create_employment_override_new("INJECT:pm_chronomantic_food_preservatives", employment_mod));
             },
             r"^pm_automata_laborers\w+$" => {
                 let original_employment = Employment::from_pm(pm_node);
                 let employment_mod = AUTOMATA_DEFAULT_TARGET - original_employment;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
             r"^pm_automata_machinists\w+$" => {
                 let original_employment = Employment::from_pm(pm_node);
                 let employment_mod = AUTOMATA_ADVANCED_DEFAULT_TARGET - original_employment;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
             // Half the employment of what's left
             r"^(?<name>\w+)$" => if has_employment_effect(pm_node) { generate_override_to_patch(&mut final_patch, pm_node, 0.5); }
@@ -376,13 +376,13 @@ pub fn patch_plantations<P: AsRef<Path>>(anbennar_path: P) -> Vec<ParadoxNode> {
                 let original_employment = Employment::from_pm(pm_node);
                 let mut employment_mod = Employment::default();
                 employment_mod.machinists = 0 - original_employment.machinists / 2;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
             r"^pm_chronoponics\w+$" => {
                 let original_employment = Employment::from_pm(pm_node);
                 let mut employment_mod = Employment::default();
                 employment_mod.machinists = 0 - original_employment.machinists / 2;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
         );
     }
@@ -420,7 +420,7 @@ pub fn patch_misc_resource<P1: AsRef<Path>, P2: AsRef<Path>>(
                 let original_employment = Employment::from_pm(pm_node);
                 let mut employment_mod = AUTOMATA_ADVANCED_DEFAULT_TARGET - original_employment;
                 employment_mod.engineers += 50;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()));
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod));
             },
             r"^(?<base_pm>pm_\w+)_cave_coral$" => 'out: {
                 let vanilla_employment = {
@@ -439,13 +439,13 @@ pub fn patch_misc_resource<P1: AsRef<Path>, P2: AsRef<Path>>(
                 let original_employment = Employment::from_pm(pm_node);
                 let mut employment_mod = Employment::default();
                 employment_mod.machinists = 0 - original_employment.machinists / 2;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
             r"^pm_chronoponics\w+$" => {
                 let original_employment = Employment::from_pm(pm_node);
                 let mut employment_mod = Employment::default();
                 employment_mod.machinists = 0 - original_employment.machinists / 2;
-                final_patch.push(create_employment_override(&format!("INJECT:{}", pm_node.name()), employment_mod.into()))
+                final_patch.push(create_employment_override_new(&format!("INJECT:{}", pm_node.name()), employment_mod))
             },
             // Half the employment of what's left
             r"^\w+$" => if has_employment_effect(pm_node) { generate_override_to_patch(&mut final_patch, pm_node, 0.2); }
