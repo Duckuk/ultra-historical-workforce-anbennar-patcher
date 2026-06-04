@@ -174,45 +174,94 @@ impl From<Employment> for ParadoxValue {
     fn from(value: Employment) -> Self {
         let mut list = Vec::new();
 
-        if value.engineers != 0 {
+        let Employment {
+            engineers,
+            labourers,
+            machinists,
+            shopkeepers,
+            farmers,
+            mages,
+            bureaucrats,
+            aristocrats,
+            capitalists,
+            soldiers,
+            officers,
+        } = value;
+
+        if engineers != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_engineers_add".into(),
-                value: ParadoxValue::Integer(value.engineers),
+                value: ParadoxValue::Integer(engineers),
             });
         }
 
-        if value.labourers != 0 {
+        if labourers != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_laborers_add".into(),
-                value: ParadoxValue::Integer(value.labourers),
+                value: ParadoxValue::Integer(labourers),
             });
         }
 
-        if value.machinists != 0 {
+        if machinists != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_machinists_add".into(),
-                value: ParadoxValue::Integer(value.machinists),
+                value: ParadoxValue::Integer(machinists),
             });
         }
 
-        if value.shopkeepers != 0 {
+        if shopkeepers != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_shopkeepers_add".into(),
-                value: ParadoxValue::Integer(value.shopkeepers),
+                value: ParadoxValue::Integer(shopkeepers),
             });
         }
 
-        if value.farmers != 0 {
+        if farmers != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_farmers_add".into(),
-                value: ParadoxValue::Integer(value.farmers),
+                value: ParadoxValue::Integer(farmers),
             });
         }
 
-        if value.mages != 0 {
+        if mages != 0 {
             list.push(ParadoxNode::Value {
                 name: "building_employment_mages_add".into(),
-                value: ParadoxValue::Integer(value.mages),
+                value: ParadoxValue::Integer(mages),
+            });
+        }
+
+        if bureaucrats != 0 {
+            list.push(ParadoxNode::Value {
+                name: "building_employment_bureaucrats_add".into(),
+                value: ParadoxValue::Integer(bureaucrats),
+            });
+        }
+
+        if aristocrats != 0 {
+            list.push(ParadoxNode::Value {
+                name: "building_employment_aristocrats_add".into(),
+                value: ParadoxValue::Integer(aristocrats),
+            });
+        }
+
+        if capitalists != 0 {
+            list.push(ParadoxNode::Value {
+                name: "building_employment_capitalists_add".into(),
+                value: ParadoxValue::Integer(capitalists),
+            });
+        }
+
+        if soldiers != 0 {
+            list.push(ParadoxNode::Value {
+                name: "building_employment_soldiers_add".into(),
+                value: ParadoxValue::Integer(soldiers),
+            });
+        }
+
+        if officers != 0 {
+            list.push(ParadoxNode::Value {
+                name: "building_employment_officers_add".into(),
+                value: ParadoxValue::Integer(officers),
             });
         }
 
