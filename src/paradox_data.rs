@@ -506,56 +506,6 @@ impl std::ops::Mul<f64> for Employment {
     }
 }
 
-impl Into<HashMap<String, ParadoxValue>> for Employment {
-    fn into(self) -> HashMap<String, ParadoxValue> {
-        let mut map = HashMap::new();
-
-        if self.engineers != 0 {
-            map.insert(
-                "building_employment_engineers_add".to_string(),
-                self.engineers.into(),
-            );
-        }
-
-        if self.labourers != 0 {
-            map.insert(
-                "building_employment_laborers_add".to_string(),
-                self.labourers.into(),
-            );
-        }
-
-        if self.machinists != 0 {
-            map.insert(
-                "building_employment_machinists_add".to_string(),
-                self.machinists.into(),
-            );
-        }
-
-        if self.shopkeepers != 0 {
-            map.insert(
-                "building_employment_shopkeepers_add".to_string(),
-                self.shopkeepers.into(),
-            );
-        }
-
-        if self.farmers != 0 {
-            map.insert(
-                "building_employment_farmers_add".to_string(),
-                self.farmers.into(),
-            );
-        }
-
-        if self.mages != 0 {
-            map.insert(
-                "building_employment_mages_add".to_string(),
-                self.mages.into(),
-            );
-        }
-
-        map
-    }
-}
-
 #[expect(unreachable_code)]
 fn read_object(mut reader: Cursor<&Vec<u8>>) -> (u64, ParadoxNode) {
     let mut children: Vec<ParadoxNode> = Vec::new();
