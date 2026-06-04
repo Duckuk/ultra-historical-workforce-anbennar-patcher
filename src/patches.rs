@@ -181,6 +181,7 @@ fn find_name_references<'a>(nodes: &'a [ParadoxNode], name: &str) -> Vec<&'a Par
 /// Unfinished. Idea was to make automata pms negate the maximum number of laborers & machinists the primary pm could give
 ///
 /// Would look cleaner to the user but I'm not sure if it'd actually have any gameplay effect
+#[expect(unused)]
 fn find_primary_pm_peak_employment(
     building_name: &str,
     building_nodes: &[ParadoxNode],

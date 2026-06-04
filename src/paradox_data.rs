@@ -2,7 +2,7 @@ use std::{
     collections::HashMap,
     fmt::Display,
     fs::read,
-    io::{BufRead, Cursor, Write},
+    io::{BufRead, Cursor},
 };
 
 use lazy_regex::{
@@ -417,6 +417,7 @@ impl Into<HashMap<String, ParadoxValue>> for Employment {
     }
 }
 
+#[expect(unreachable_code)]
 fn read_object(mut reader: Cursor<&Vec<u8>>) -> (u64, ParadoxNode) {
     let mut children: Vec<ParadoxNode> = Vec::new();
     let name = {
@@ -465,11 +466,4 @@ fn read_object(mut reader: Cursor<&Vec<u8>>) -> (u64, ParadoxNode) {
             value: ParadoxValue::Container(children),
         },
     )
-}
-
-fn exclude_comment(s: &str) -> &str {
-    match s.find('#') {
-        Some(i) => &s[..i],
-        None => s,
-    }
 }

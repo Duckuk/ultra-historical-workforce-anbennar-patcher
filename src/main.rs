@@ -23,7 +23,6 @@ fn parse_args() -> PatcherOptions {
     let mut positional: usize = 0;
     let mut anbennar_path: Option<PathBuf> = None;
     let mut uhw_path: Option<PathBuf> = None;
-    let mut vic3_path: Option<PathBuf> = None;
 
     for arg in std::env::args().skip(1) {
         if arg.starts_with("-") {
