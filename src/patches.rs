@@ -136,37 +136,14 @@ fn generate_override_to_patch(
     original_node: &ParadoxNode,
     percent_reduction: f64,
 ) {
-    if let Some(ParadoxValue::Container(list)) =
-        original_node.get_value(&["building_modifiers", "level_scaled"])
-    {
-        let mut new_modifiers: HashMap<String, ParadoxValue> = HashMap::new();
-        for (modifier_name, modifier_value) in list
-            .iter()
-            .filter(|v| v.name().starts_with("building_employment"))
-            .filter_map(|v| {
-                if let ParadoxNode::Value {
-                    name,
-                    value: ParadoxValue::Integer(i),
-                } = v
-                {
-                    Some((name, i))
-                } else {
-                    None
-                }
-            })
-        {
-            let modifier_subtraction =
-                0 - f64::round(*modifier_value as f64 * percent_reduction) as i64;
-            new_modifiers.insert(
-                modifier_name.clone(),
-                ParadoxValue::Integer(modifier_subtraction),
-            );
-        }
-        patch.push(create_employment_override(
-            &format!("INJECT:{}", original_node.name()),
-            new_modifiers,
-        ))
-    }
+    let original_employment = Employment::from_pm(original_node);
+    let target_employment = original_employment * (1.0 - percent_reduction);
+    let employment_mod = target_employment - original_employment;
+
+    patch.push(create_employment_override_new(
+        &format!("INJECT:{}", original_node.name()),
+        employment_mod,
+    ));
 }
 
 /// Returns nodes that mention `name` anywhere inside them.
