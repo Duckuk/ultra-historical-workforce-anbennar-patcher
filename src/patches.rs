@@ -37,6 +37,8 @@ const AUTOMATA_DEFAULT_TARGET: Employment = Employment {
     bureaucrats: 0,
     aristocrats: 0,
     capitalists: 0,
+    soldiers: 0,
+    officers: 0,
 };
 const AUTOMATA_ADVANCED_DEFAULT_TARGET: Employment = Employment {
     engineers: 0,
@@ -48,6 +50,8 @@ const AUTOMATA_ADVANCED_DEFAULT_TARGET: Employment = Employment {
     bureaucrats: 0,
     aristocrats: 0,
     capitalists: 0,
+    soldiers: 0,
+    officers: 0,
 };
 
 /// Searches top-level list of nodes for a name that matches

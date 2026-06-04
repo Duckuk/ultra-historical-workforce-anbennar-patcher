@@ -265,6 +265,8 @@ pub struct Employment {
     pub bureaucrats: i64,
     pub aristocrats: i64,
     pub capitalists: i64,
+    pub soldiers: i64,
+    pub officers: i64,
 }
 
 impl Employment {
@@ -359,6 +361,26 @@ impl Employment {
             0
         };
 
+        let soldiers = if let Some(ParadoxValue::Integer(i)) = pm_node.get_value(&[
+            "building_modifiers",
+            "level_scaled",
+            "building_employment_soldiers_add",
+        ]) {
+            *i
+        } else {
+            0
+        };
+
+        let officers = if let Some(ParadoxValue::Integer(i)) = pm_node.get_value(&[
+            "building_modifiers",
+            "level_scaled",
+            "building_employment_officers_add",
+        ]) {
+            *i
+        } else {
+            0
+        };
+
         Self {
             engineers,
             labourers,
@@ -369,6 +391,8 @@ impl Employment {
             bureaucrats,
             aristocrats,
             capitalists,
+            soldiers,
+            officers,
         }
     }
 }
@@ -387,6 +411,8 @@ impl std::ops::Add for Employment {
             bureaucrats: self.bureaucrats + rhs.bureaucrats,
             aristocrats: self.aristocrats + rhs.aristocrats,
             capitalists: self.capitalists + rhs.capitalists,
+            soldiers: self.soldiers + rhs.soldiers,
+            officers: self.officers + rhs.officers,
         }
     }
 }
@@ -405,6 +431,8 @@ impl std::ops::Sub for Employment {
             bureaucrats: self.bureaucrats - rhs.bureaucrats,
             aristocrats: self.aristocrats - rhs.aristocrats,
             capitalists: self.capitalists - rhs.capitalists,
+            soldiers: self.soldiers - rhs.soldiers,
+            officers: self.officers - rhs.officers,
         }
     }
 }
@@ -423,6 +451,8 @@ impl std::ops::Mul<f64> for Employment {
             bureaucrats: f64::round(self.bureaucrats as f64 * rhs) as i64,
             aristocrats: f64::round(self.aristocrats as f64 * rhs) as i64,
             capitalists: f64::round(self.capitalists as f64 * rhs) as i64,
+            soldiers: f64::round(self.soldiers as f64 * rhs) as i64,
+            officers: f64::round(self.officers as f64 * rhs) as i64,
         }
     }
 }
